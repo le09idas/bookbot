@@ -25,11 +25,20 @@ def character_count(book_text):
 
 def main():
 
-    with open("books/frankenstein.txt", "r", encoding="utf-8") as f:
+    book_path = "books/frankenstein.txt"
+
+    with open(book_path, "r", encoding="utf-8") as f:
         file_contents = f.read()
     
-    print(file_contents)
-    print(word_count(file_contents))
-    print(character_count(file_contents))
+    print(f"--- Begin report of {book_path} ---")
+    print(f"{word_count(file_contents)} words found in the document")
+    print("")
+    
+    char_count = character_count(file_contents)
+
+    for char in char_count:
+        print(f"The '{char}' character was found {char_count[char]} times")
+
+    print("--- End report ---")
 
 main()
