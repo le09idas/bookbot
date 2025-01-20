@@ -27,7 +27,7 @@ def character_count(book_text):
 
 def main():
 
-    book_path = "books/frankenstein.txt"
+    book_path = input("Enter path to book text file: i.e. /path/to/book/text\n")
 
     with open(book_path, "r", encoding="utf-8") as f:
         file_contents = f.read()
