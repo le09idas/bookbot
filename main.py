@@ -15,7 +15,9 @@ def character_count(book_text):
     for word in book_text:
         for char in word:
             c = char.casefold()             #casefold() is used because casing is ignored
-            if c not in character_totals:
+            if c in {".", " ", "#"}:
+                pass
+            elif c not in character_totals:
                 character_totals[c] = 1
             else:
                 character_totals[c] += 1
