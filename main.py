@@ -10,12 +10,13 @@ def word_count(book_text):
 #with case-insensitive comparison
 def character_count(book_text):
     
+    excluded_chars = {".", " ", "#"}
     character_totals = {}
 
     for word in book_text:
         for char in word:
             c = char.casefold()             #casefold() is used because casing is ignored
-            if c in {".", " ", "#"}:
+            if c in excluded_chars:
                 pass
             elif c not in character_totals:
                 character_totals[c] = 1
