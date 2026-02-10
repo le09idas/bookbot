@@ -1,38 +1,32 @@
-#get total count of words in text
-def word_count(book_text):
-    #simple counting of the split of the text of the book
+from stats import word_count, character_count
 
-    word_total = len(book_text.split())
-
-    return word_total
-
-#get the count of each individual character in a dict 
-#with case-insensitive comparison
-def character_count(book_text):
+#get the text of the book from the file path given by the user
+def get_book_text(book_path):
     
-    excluded_chars = {".", " ", "#"}
-    character_totals = {}
-
-    for word in book_text:
-        for char in word:
-            c = char.casefold()             #casefold() is used because casing is ignored
-            if c in excluded_chars:
-                pass
-            elif c not in character_totals:
-                character_totals[c] = 1
-            else:
-                character_totals[c] += 1
-
-    return character_totals
-
-
-def main():
-
-    book_path = input("Enter path to book text file: i.e. /path/to/book/text\n")
-
     with open(book_path, "r", encoding="utf-8") as f:
         file_contents = f.read()
     
+    return file_contents
+
+def main():
+
+   #book_path = input("Enter path to book text file: i.e. /path/to/book/text\n")
+    #file_contents = ""
+    book_path = "books/frankenstein.txt"
+    file_contents = ""
+
+    with open(book_path, "r", encoding="utf-8") as f:
+        file_contents = f.read()
+
+    words = word_count(file_contents)
+
+    print(f'Found {words} total words')
+
+    chars = character_count(file_contents)
+
+    print(chars)
+    
+    '''
     print(f"--- Begin report of {book_path} ---")
     print(f"{word_count(file_contents)} words found in the document")
     print("")
@@ -43,5 +37,6 @@ def main():
         print(f"The '{char}' character was found {char_count[char]} times")
 
     print("--- End report ---")
+    '''
 
 main()
