@@ -1,4 +1,6 @@
-from stats import word_count, character_count
+from stats import word_count, character_count, sort_chars
+
+import sys
 
 #get the text of the book from the file path given by the user
 def get_book_text(book_path):
@@ -10,9 +12,13 @@ def get_book_text(book_path):
 
 def main():
 
-   #book_path = input("Enter path to book text file: i.e. /path/to/book/text\n")
+    if len(sys.argv) != 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+
+    #book_path = input("Enter path to book text file: i.e. /path/to/book/text\n")
     #file_contents = ""
-    book_path = "books/frankenstein.txt"
+    book_path = sys.argv[1]
     file_contents = ""
 
     with open(book_path, "r", encoding="utf-8") as f:
@@ -20,23 +26,26 @@ def main():
 
     words = word_count(file_contents)
 
-    print(f'Found {words} total words')
+    #print(f'Found {words} total words')
 
     chars = character_count(file_contents)
 
-    print(chars)
-    
-    '''
-    print(f"--- Begin report of {book_path} ---")
-    print(f"{word_count(file_contents)} words found in the document")
-    print("")
-    
-    char_count = character_count(file_contents)
+    #print(chars)
 
-    for char in char_count:
-        print(f"The '{char}' character was found {char_count[char]} times")
+    char_dict = sort_chars(chars)
 
-    print("--- End report ---")
-    '''
+    #print(char_dict)
+
+    print("============ BOOKBOT ============")
+    print(f"Analyzing book found at {book_path}...")
+    print("----------- Word Count ----------")
+    print(f"Found {words} total words")
+    print("--------- Character Count -------")
+
+    for dic in char_dict:
+        if dic["char"].isalpha():
+            print(f"{dic["char"]}: {dic["num"]}")
+
+    print("============= END ===============")
 
 main()

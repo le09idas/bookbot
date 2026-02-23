@@ -24,3 +24,24 @@ def character_count(book_text):
                 character_totals[c] += 1
 
     return character_totals
+
+def sort_on(dict):
+    return dict["num"]
+
+def sort_chars(char_map):
+    
+    char_dict_list = []
+
+    for char in char_map:
+        char_dict_list.append({
+            "char": char,
+            "num": char_map[char]
+        })
+
+    char_dict_list.sort(reverse=True, key=sort_on)
+
+    return char_dict_list
+
+
+
+
